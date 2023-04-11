@@ -1,6 +1,7 @@
 import { Card, Divider, Grid, Text, Row, Col, Container, Input, Image, Button, Link, Loading } from "@nextui-org/react"
 import { useState } from "react";
 import SignupBK from '../images/signup-bk.jpg'
+import Http from "../services/Services";
 
 let showModal = false;
 
@@ -49,7 +50,7 @@ const verifyData = (setShow) => {
 
 const sendDataIntoServer = (data,setShow) => {
 
-    fetch('http://localhost:8000/signup',{
+    fetch(Http.host + '/signup',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -185,9 +186,9 @@ const Signup = () => {
                                         </Row>
                                         <br />
                                         <Row>
-                                            <Button auto color={'secondary'} onPress={() => verifyData(setShow)}>continuar &nbsp; <i className="fa fa-send"></i></Button>
+                                            <Button auto color={'secondary'} onClick={() => verifyData(setShow)}>continuar &nbsp; <i className="fa fa-send"></i></Button>
                                             &nbsp;
-                                            <Button auto bordered color={'secondary'} onPress={() => goTologin()}>ir al login &nbsp; <i className="fa fa-user-circle"></i></Button>
+                                            <Button auto bordered color={'secondary'} onClick={() => goTologin()}>ir al login &nbsp; <i className="fa fa-user-circle"></i></Button>
                                         </Row>
                                         <br />
                                     </Col>

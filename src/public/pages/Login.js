@@ -1,6 +1,7 @@
 import { Card, Divider, Grid, Text, Row, Col, Container, Input, Image, Button, Link, Loading } from "@nextui-org/react"
 import { useEffect, useState } from "react";
-import LoginBK from '../images/login-bk.jpg'
+//import LoginBK from '../images/login-bk.jpg'
+import Http from "../services/Services";
 
 let showModal = false;
 
@@ -47,7 +48,7 @@ const getFields = () => {
 
 const sendDataIntoServer = (data,setShow) => {
 
-    fetch('http://localhost:8000/login',{
+    fetch(Http.host + '/login',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -145,13 +146,13 @@ const Login = () => {
                                             marginBottom: '0.5em'
                                         }}>Complete los Campos &nbsp; <i className="fa fa-user-circle"></i></Text>
                                         <br />
-                                        <Input name="username" labelPlaceholder="usuario" bordered clearable css={{ width: '100%' }} defaultValue={'rflores'} />
+                                        <Input name="username" labelPlaceholder="usuario" bordered clearable css={{ width: '100%' }} value={'rflores'} />
                                         <br />
                                         <br />
                                         <Input name="password" labelPlaceholder="contraseña" type={'password'} bordered clearable css={{ 
                                             width: '100%',
                                             marginTop: '0.8em',
-                                        }} defaultValue={'Pro.123.'} 
+                                        }} value={'Pro.123.'} 
                                         />
                                         <br />
                                         <br />
@@ -162,9 +163,9 @@ const Login = () => {
                                         </Row>
                                         <br />
                                         <Row>
-                                            <Button auto onPress={() => verifyData(setShow)}>continuar &nbsp; <i className="fa fa-send"></i></Button>
+                                            <Button auto onClick={() => verifyData(setShow)}>continuar &nbsp; <i className="fa fa-send"></i></Button>
                                             &nbsp;
-                                            <Button auto bordered onPress={() => goToSignup()}>registro &nbsp; <i className="fa fa-address-card"></i></Button>
+                                            <Button auto bordered onClick={() => goToSignup()}>registro &nbsp; <i className="fa fa-address-card"></i></Button>
                                         </Row>
                                         <br />
                                         <Row>
@@ -176,7 +177,7 @@ const Login = () => {
                                     <Image
                                             width={'100%'}
                                             height={'100%'}
-                                            src={LoginBK}
+                                            src={ Http.host + '/images/login-bk.jpg'}
                                             alt="Default Image"
                                             objectFit="cover"
                                             css={{

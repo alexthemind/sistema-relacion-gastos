@@ -1,5 +1,6 @@
 import { Navbar, Button, Text, Badge, Avatar, Dropdown, Divider, Row, Col } from "@nextui-org/react"
 import { useEffect, useState } from "react";
+import Http from "../services/Services";
 
 let countNotification = 0;
 
@@ -16,9 +17,7 @@ const eventChange = (evt) => {
         }).then(click => {
             if(click)
             {
-                delete localStorage.token;
-                delete localStorage.fullname;
-                delete localStorage.username;
+                localStorage.clear();
         
                 setTimeout(() => {
                     window.location.href = './';
@@ -71,7 +70,7 @@ const NavigationSetMark = () => {
 }
 
 const loadNotifications = (setData) => {
-    fetch('http://localhost:8000/get-notifications?user=' + localStorage.username ,{
+    fetch(Http.host + '/get-notifications?user=' + localStorage.username ,{
         headers: {
             'Content-type': 'application/json'
         }
@@ -101,7 +100,7 @@ const MainNavigation = () => {
 
     useEffect(() => {
         loadNotifications(setNotifications);
-    },countNotification)
+    },[])
 
     return (
         <Navbar variant={'sticky'} css={{
@@ -117,9 +116,9 @@ const MainNavigation = () => {
                 hideIn="xs" 
                 variant="highlight-rounded"
             >
-                <Navbar.Link onPress={(e) => defineNavigation(e)}>Inicio</Navbar.Link>
-                <Navbar.Link onPress={(e) => defineNavigation(e)}>Historial</Navbar.Link>
-                <Navbar.Link onPress={(e) => defineNavigation(e)}>Comunicados</Navbar.Link>
+                <Navbar.Link onClick={(e) => defineNavigation(e)}>Inicio</Navbar.Link>
+                <Navbar.Link onClick={(e) => defineNavigation(e)}>Historial</Navbar.Link>
+                <Navbar.Link onClick={(e) => defineNavigation(e)}>Comunicados</Navbar.Link>
             </Navbar.Content>
             <Navbar.Content css={{
                 display: loggin ? 'none' : 'block'
@@ -135,7 +134,7 @@ const MainNavigation = () => {
             }}>
                 <Navbar.Item>
                     <Badge content={_notifications != 0 && _notifications} color={'error'}>
-                        <Button id='notifications' onPress={(e) => defineNavigation(e)}
+                        <Button id='notifications' onClick={(e) => defineNavigation(e)}
                         rounded 
                         auto 
                         flat

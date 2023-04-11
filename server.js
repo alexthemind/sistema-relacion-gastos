@@ -6,6 +6,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8000;
 
+app.use(express.static(path.join(__dirname,'build')));
+app.use('/images',express.static(path.join(__dirname,'src','public','images')))
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -116,6 +118,12 @@ app.get('/get-notifications',(req,res) => {
         });
     });
 
+})
+
+app.get('/', (req,res) => {
+    res.sendFile('index.html', {
+        root: path.join(__dirname,'build')
+    })
 })
 
 app.listen(PORT, () => {

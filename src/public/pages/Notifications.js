@@ -1,12 +1,13 @@
 import { Container, Grid, Col, Collapse, Text, Avatar, Link, Card, Row, Button, Badge, Input } from "@nextui-org/react"
 import { useEffect, useState } from "react"
 //import notificationData from '../data/notifications.json'
+import Http from "../services/Services";
 
 let notificationData = [];
 let searchData = [];
 
 const loadNotifications = (setData) => {
-    fetch('http://localhost:8000/get-notifications?user=' + localStorage.username ,{
+    fetch(Http.host + '/get-notifications?user=' + localStorage.username ,{
         headers: {
             'Content-type': 'application/json'
         }

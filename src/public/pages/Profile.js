@@ -19,7 +19,7 @@ const Profile = () => {
 
     useEffect(() => {
         getUserSession(setUser);
-    }, usersData)
+    }, [])
 
     return (
         <Grid.Container gap={2}>

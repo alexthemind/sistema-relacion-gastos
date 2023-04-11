@@ -19,12 +19,16 @@ const App = () => {
                 <MainNavigation />
             
                 <Routes>
-                    <Route path="/" element={ logged ? Home() : Login() } />
-                    <Route path="/signup" element={<Signup key={'signup'} />} />
-                    <Route path="/historial" element={<History key={'historial'} />} />
-                    <Route path="/comunicados" element={<News key={'departamentos'} />} />
-                    <Route path="/notifications" element={<Notifications key={'notificaciones'} />} />
-                    <Route path="/profile" element={<Profile key={'perfil'} />} />
+                    {logged ? <>
+                        <Route path="/" element={<Home key={'home'} />} />
+                        <Route path="/signup" element={<Signup key={'signup'} />} />
+                        <Route path="/historial" element={<History key={'historial'} />} />
+                        <Route path="/comunicados" element={<News key={'departamentos'} />} />
+                        <Route path="/notifications" element={<Notifications key={'notificaciones'} />} />
+                        <Route path="/profile" element={<Profile key={'perfil'} />} />
+                    </> : <>
+                        <Route path="/" element={Login()} />
+                    </>}
                 </Routes>
             </NextUIProvider>
         </BrowserRouter>
